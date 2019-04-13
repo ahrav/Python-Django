@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Add Plan</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <style media="screen">
+      h3{
+        margin-left: 2%;
+        margin-bottom: 2%;
+      }
+      .error{
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    {% if messages %}
+      {% for message in messages %}
+        <p class="{{ message.tags }}">{{message}}</p>
+      {% endfor %}
+    {% endif %}
+    <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+      <a class="navbar-brand" href="/travels">Travel Buddy</a>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#"><span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
+        <a class="navbar-brand" href="/travels">Home</a>
+        <a class="navbar-brand" href="/logout">Log off</a>
+      </div>
+    </nav>
+    <h3>Add a Trip</h3>
+    <div class="container">
+      <div class="col-sm-9">
+        <form action="/add_plan" method="post">
+          {% csrf_token %}
+          <div class="form-group row">
+            <label class="col-2 col-form-label">Destination: </label>
+            <div class="col-6">
+              <input type="text" name="destination">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-2 col-form-label">Description: </label>
+            <div class="col-6">
+              <input type="text" name="description">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-2 col-form-label">Travel Date From: </label>
+            <div class="col-6">
+              <input type="date" name="travel_from_date">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-2 col-form-label">Travel Date To: </label>
+            <div class="col-6">
+            <input type="date" name="travel_to_date">
+            </div>
+          </div>
+          <div class="form-group row">
+            <button type="submit" class="btn btn-primary">Add</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Login/Registration</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <style media="screen">
+      .error{
+        color: red;
+      }
+      h3{
+        margin-bottom: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="jumbotron">
+      <h1 class="display-3">Welcome to Travel Buddy!</h1>
+      <p class="lead">This is an easy to use application to help plan your trips, and take a break from coding!</p>
+    </div>
+    {% if messages %}
+      {% for message in messages %}
+        <p class="{{ message.tags }}">{{message}}</p>
+      {% endfor %}
+    {% endif %}
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <form action="/register" method="post">
+            {% csrf_token %}
+            <h3>Register</h3>
+            <div class="form-group">
+              <label>Name: </label>
+              <input type="text" name="name" >
+            </div>
+            <div class="form-group">
+              <label>Username: </label>
+              <input type="text" name="username">
+            </div>
+            <div class="form-group">
+              <label>Password: </label>
+              <input type="password" name="password">
+            </div>
+            <div class="form-group">
+              <small class="form-text text-muted">*Password should be at least 8 characters</small>
+              <label>Confirm PW: </label>
+              <input type="password" name="password_confirm">
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary">Register</button>
+            </div>
+          </form>
+        </div>
+        <div class="col-sm-6">
+          <form action="/login" method="post">
+            {% csrf_token %}
+            <h3>Login</h3>
+            <div class="form-group">
+              <label>Username: </label>
+              <input type="text" name="username">
+            </div>
+            <div class="form-group">
+              <label>Password: </label>
+              <input type="password" name="password">
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary">Login</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

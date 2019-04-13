@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Travel Dashboard</title>
+    <title>Login/Registration</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <style media="screen">
+      .bottom{
+        margin-top: 50px;
+      }
+      .heading{
+        padding-bottom: 20px;
+      }
+      span.align-right{
+        margin-left: 80%;
+      }
+      table {
+    width: 50%;
+}
+
+thead, tbody, tr, td, th {
+    display: block;
+}
+
+thead th {
+    height: 45px;
+}
+
+tbody {
+    overflow-y: auto;
+    height: 150px;
+}
+
+tbody td, thead th {
+    float: left;
+    width: 20%;
+}
+
+tr:after {
+    clear: both;
+    content: ' ';
+    display: block;
+    visibility: hidden;
+}
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+      <a class="navbar-brand" href="/travels">Travel Buddy</a>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/travels">Dashboard <span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
+        <a class="navbar-brand" href="/logout">Log off</a>
+      </div>
+    </nav>
+    <h3 class="heading">Hello, {{user.name}}!</h3>
+    <h5>Your Trip Schedules</h5>
+      <table class="table table-fixed table-sm">
+        <thead>
+          <tr>
+            <th>Destination</th>
+            <th>Travel Start Date</th>
+            <th>Travel End Date</th>
+            <th>Plan</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for trip in user_trips %}
+          <tr>
+            <td class=><a href="/travels/destination/{{trip.id}}">{{trip.destination}}</a></td>
+            <td>{{trip.travel_start_date}}</td>
+            <td>{{trip.travel_end_date}}</td>
+            <td>{{trip.plan}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    <h5 class="bottom">Other User's Travel Plans</h5>
+    <table class="table table-fixed table-sm">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Destination</th>
+          <th>Travel Start Date</th>
+          <th>Travel End Date</th>
+          <th>Do You Want to Join?</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for other_user in other_users %}
+          {% for trip in other_user.trips.all %}
+          <tr>
+            <td>{{other_user.name}}</td>
+            <td><a href="/travels/destination/{{trip.id}}">{{trip.destination}}</a></td>
+            <td>{{trip.travel_start_date}}</td>
+            <td>{{trip.travel_end_date}}</td>
+            <td><a href="/join/{{trip.id}}">Join</a></td>
+          </tr>
+          {% endfor %}
+        {% endfor %}
+      </tbody>
+    </table>
+    <span class="align-right"><a class="btn btn-link" href="/travels/add">Add Travel Plan</a></span>
+  </body>
+</html>
