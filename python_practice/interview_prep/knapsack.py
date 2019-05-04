@@ -21,8 +21,8 @@ def knappySack(max_weight, weights, values, n):
         for j in range(weights+1):
             if i == 0 or j == 0:
                 return 0
-            else if weights[i-1] <= j:
-                cache[i][j] = max(val(i-1) + cache[i-1][j-weights[i-1]], cache[i-1][j])
+            elif weights[i-1] <= j:
+                cache[i][j] = max(values(i-1) + cache[i-1][j-weights[i-1]], cache[i-1][j])
             else:
                 cache[i][j] = cache[i-1][j]
         return cache[n][max_weight]

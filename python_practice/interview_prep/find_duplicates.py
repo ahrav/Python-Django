@@ -14,3 +14,16 @@ def find_duplicates(arr):
     for i in range(len(arr)):
         arr[i] = abs(arr[i])
     return list(result)
+
+
+def find_dupes(arr):
+    result = set()
+    for i in range(len(arr)):
+        index = abs(arr[i]-1)
+        if arr[index] < 0:
+            result.add(abs(arr[index]))
+        else:
+            arr[index] = -arr[index]
+    for x in range(arr):
+        x = abs(x)
+    return list(result)

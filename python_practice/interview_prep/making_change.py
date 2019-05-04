@@ -10,8 +10,18 @@ def dp_change_maker(coins, change):
         min_coins[cents] = coin_count
     return min_coins[change]
 
+def make_change(coins, change):
+    min_coins = [0 for coin in range(change+1)]
+    for cents in range(change+1):
+        coin_count = cents
+        for j in [c for c in coins if c <= cents]:
+            if min_coins[cents - j] + 1 < coin_count:
+                coin_count = min_coins[cents - j] + 1
+        min_coins[cents] = coin_count
+    return min_coins[change]
 
-print (dp_change_maker(coins, 32))
+
+print (make_change(coins, 32))
 
 
 def dynamic_change_maker(coin_list, change):

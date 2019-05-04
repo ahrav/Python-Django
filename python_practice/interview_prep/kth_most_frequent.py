@@ -8,7 +8,7 @@ def kth_most_frequent(arr, num):
             frequency_dict[word] = 1
 
     index = abs(num + 1)
-    if num + 1 > len(frequency_dict.keys()):
+    if num  >= len(frequency_dict.keys()):
         return "Num greater than unique strings"
     value = sorted([y for x, y in frequency_dict.items()])[-index]
     for key, val in frequency_dict.items():
@@ -17,4 +17,4 @@ def kth_most_frequent(arr, num):
 
 
 words = ['i', 'am', 'am', 'i', 'eat', 'eat', 'a', 'lot', 'i']
-print (kth_most_frequent(words, 1))
+print(kth_most_frequent({"a","b","c","a","b","a"}, 3)) 

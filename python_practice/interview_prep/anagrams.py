@@ -24,7 +24,6 @@ def is_anagram(word1, word2):
             return False
     return True
 
-    print (letters)
     
 word1 = 'caabbb'
 word2 = 'bbbaaa'

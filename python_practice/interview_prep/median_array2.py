@@ -1,11 +1,4 @@
 def get_median(arr1, arr2, n):
-
-    def median(arr, n):
-        if n % 2 == 0:
-            return (arr[n//2]) + (arr[(n//2 - 1)]) / 2
-        else:
-            return arr[n//2] 
-
     if n == 0:
         return -1
     if n == 1:
@@ -26,6 +19,11 @@ def get_median(arr1, arr2, n):
                 return get_median(arr2[(n//2 - 1):], arr1[:(n//2 + 1)], (n//2)+1)
             else:
                 return get_median(arr2[n//2:], arr1[:(n//2 + 1)], (n//2)+1)
+def median(arr, n):
+        if n % 2 == 0:
+            return (arr[n//2]) + (arr[(n//2 - 1)]) / 2
+        else:
+            return arr[n//2] 
 
 
 ar1 = [1, 12, 15, 26, 38] 
