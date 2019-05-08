@@ -8,6 +8,6 @@ from .views import (
 
 app_name = 'status'
 urlpatterns = [
-    path('', StatusAPIView.as_view()),
-    path('<pk>/', StatusAPIDetailView.as_view())
+    path('', StatusAPIView.as_view(), name='list'),
+    path('<id>/', StatusAPIDetailView.as_view(), name='detail')
 ]

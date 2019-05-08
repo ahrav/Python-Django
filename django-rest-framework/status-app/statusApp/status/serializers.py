@@ -1,30 +1,25 @@
 from rest_framework import serializers
 from accounts.serializers import UserSerializer
+from rest_framework.reverse import reverse as api_reverse
 
 from .models import Status
 
-class StatusInlineuserSerializer(serializers.ModelSerializer):
-    uri = serializers.SerializerMethodField(read_only=True)
-    class Meta:
-        model = Status
-        fields = [
-            'id',
-            'user',
-            'content',
-            'image',
-            'uri'
-        ]
-    
-    def get_uri(self, obj):
-        return '/api/status/{id}'.format(id=obj.id)
-
 class StatusSerializer(serializers.ModelSerializer):
-    user = UserSerializer(read_only=True)
+    # user = UserSerializer(read_only=True)
     uri = serializers.SerializerMethodField(read_only=True)
+    user_id = serializers.HyperlinkedRelatedField(
+        source='user',
+        lookup_field='username',
+        view_name='user:detail',
+        read_only=True
+    )
+    user = serializers.SlugRelatedField(read_only=True, slug_field='username')
+    # user = serializers.SerializerMethodField(read_only=True)
     class Meta:
         model = Status
         fields = [
             'id',
+            'user_id',
             'user',
             'content',
             'image',
@@ -33,7 +28,13 @@ class StatusSerializer(serializers.ModelSerializer):
         read_only_fields = ['user']
     
     def get_uri(self, obj):
-        return '/api/status/{id}'.format(id=obj.id)
+        request = self.context.get('request')
+        return api_reverse("status:detail", kwargs={'id': obj.id}, request=request)
+
+    # def get_user(self, obj):
+    #     request = self.context.get('request')
+    #     user = obj.user
+    #     return UserSerializer(user, read_only=True, context={'request': request}).data
 
     # Field level validation
     # def validate_content(self, value):
@@ -49,3 +50,20 @@ class StatusSerializer(serializers.ModelSerializer):
         if content is None and image is None:
             raise serializers.ValidationError('Content or image is required')
         return data
+
+class StatusInlineuserSerializer(serializers.ModelSerializer):
+    uri = serializers.SerializerMethodField(read_only=True)
+
+    class Meta:
+        model = Status
+        fields = [
+            'id',
+            'user',
+            'content',
+            'image',
+            'uri'
+        ]
+    
+    def get_uri(self, obj):
+        request = self.context.get('request')
+        return api_reverse('status:detail', kwargs={"id": obj.id}, request=request)

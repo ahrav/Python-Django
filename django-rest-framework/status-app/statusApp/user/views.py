@@ -11,9 +11,13 @@ class UserDetailAPIView(generics.RetrieveAPIView):
     serializer_class = UserDetailSerializer
     lookup_field = 'username'
 
+    def get_serializer_context(self):
+        return {'request': self.request}
+
 class UserStatusAPIView(generics.ListAPIView):
     serializer_class = StatusInlineuserSerializer
-
+    search_fields = ('user__username', 'content')
+    
     def get_queryset(self, *args, **kwargs):
         username = self.kwargs.get('username', None)
         if username is None:
