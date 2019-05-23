@@ -15,22 +15,22 @@ class Trie:
         self.root = TrieNode()
 
     def insert(self, word):
-        curr = self.root
+        current = self.root
         for letter in word:
-            node = curr.children.get(letter)
+            node = current.children.get(letter)
             if not node:
                 node = TrieNode()
-                curr.children[letter] = node
-            curr = node
-        curr.end = True
+                current.children[letter] = node
+            current = node
+        current.end = True
         
     def all_words_beginning_with_prefix(self, prefix):
-        cur = self.root
+        current = self.root
         for c in prefix:
-            cur = cur.children.get(c)
-            if cur is None:
+            current = current.children.get(c)
+            if current is None:
                 return
-            yield cur.all_words(prefix)
+        yield current.all_words(prefix)
 
 
 

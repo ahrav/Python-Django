@@ -1,6 +1,6 @@
 # Implement Binary Search algorithm.
 
-def binary_serach(arr, ele):
+def binary_search(arr, ele):
     first = 0
     last = len(arr)-1
     found = False
@@ -17,4 +17,4 @@ def binary_serach(arr, ele):
     return found
 
 arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-print (binary_serach(arr, 4))
+print (binary_search(arr, 4))

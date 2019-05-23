@@ -10,7 +10,7 @@ def dedup(n):
     duplicates = set()
     prev = None
     while n is not None:
-        if n in duplicates:
+        if n.data in duplicates:
             prev.next = n.next
         else:
             duplicates.add(n.value)
@@ -34,11 +34,9 @@ class Node:
         self.Next = None
 
 def linked_duplicates(node):
-    while node is not None:
-        curr = node
-        while curr.next is not None:
-            if curr.next.value == node.value:
-                curr.next = curr.next.next
-            else:
-                curr = curr.next
-        node = node.next
+    curr = head
+    while curr is not None and curr.next is not None:
+        while curr.next is not None and curr.data is curr.next.data:
+            curr.next = curr.next.next
+        curr = curr.next
+    return head
