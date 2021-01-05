@@ -5,7 +5,7 @@
   "proxy": "http://localhost:8000",
   "dependencies": {
     "@reach/router": "^1.2.1",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "bootstrap": "^4.3.1",
     "formik": "^1.5.4",
     "react": "^16.8.6",
